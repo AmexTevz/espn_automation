@@ -10,7 +10,7 @@ from selenium.webdriver.edge.service import Service
 # driver functionality for Chrome
 def chromedriver():
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     return driver
 
@@ -18,7 +18,7 @@ def chromedriver():
 # driver functionality for Edge
 def edgeDriver():
     edge_options = webdriver.EdgeOptions()
-    # edge_options.add_argument('--headless')
+    edge_options.add_argument('--headless')
     driver = webdriver.Edge(service=Service(EdgeChromiumDriverManager().install()), options=edge_options)
     return driver
 
@@ -26,7 +26,7 @@ def edgeDriver():
 # driver functionality for FireFox
 def firefoxDriver():
     firefox_options = webdriver.FirefoxOptions()
-    # firefox_options.add_argument('--headless')
+    firefox_options.add_argument('--headless')
     driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=firefox_options)
     return driver
 

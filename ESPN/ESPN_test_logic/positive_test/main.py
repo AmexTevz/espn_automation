@@ -7,7 +7,7 @@ from ESPN.tools import webDrivers
 # gets driver functionality from tools/webDriver
 driver = webDrivers.chromedriver()
 
-# navigate to the ESPN_test_logic - Runs from selector.py - main_link
+# navigate to the ESPN website - Runs from selector.py - main_link
 driver.get(selectors.main_link)
 driver.maximize_window()
 
@@ -17,7 +17,6 @@ try:
     print('The header is correct')
 except WDE:
     print('The header is incorrect')
-
 
 # signup for the ESPN_test_logic - Runs from selectors.py - signup method
 selectors.signup(driver)
@@ -36,8 +35,12 @@ try:
     welcome_text = driver.find_element(By.CLASS_NAME, "display-user").text
     assert selectors.first_name in welcome_text
     print(f'text detected - Welcome {selectors.first_name}')
+except AssertionError:
+    welcome_text = driver.find_element(By.XPATH, "(//li[@class='display-user'])[2]").text
+    assert selectors.first_name in welcome_text
+    print(f'asserted through secondary locator - Welcome {selectors.first_name}')
 except WDE:
-    print('can not find the name ')
+    print('The welcome massage not detected')
 
 # Add teams to favorites - Runs from selectors.py favorite_team method
 selectors.favorite_team(driver)
@@ -46,22 +49,21 @@ time.sleep(1)
 # Log out from the account
 selectors.log_out(driver)
 time.sleep(1)
-print('Successfully signed out')
 
 # Log back in
 selectors.log_in(driver)
 time.sleep(1)
-print('Successfully signed back in')
 
 # Delete the account - Runs from selectors.py - delete_profile method
 selectors.delete_profile(driver)
 time.sleep(1)
-print('The account has been deleted')
 
 # Try to sign in into deleted account - check if account is still active or not
 try:
     assert "There's a problem" in selectors.log_in_no_account(driver)
     print("Account is disabled")
+except TypeError:
+    print('Finishing test - Fail due to confirmation dialog')
 except WDE:
     print("The account is still active")
 
