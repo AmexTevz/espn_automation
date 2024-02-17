@@ -3,21 +3,9 @@ from selenium.common.exceptions import WebDriverException as WDE
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from faker import Faker
 import random
 import string
 import time
-
-fake = Faker()
-
-# Fake first name from faker library
-first_name = fake.first_name()
-
-# Fake last name from faker library
-last_name = fake.last_name()
-
-# Fake email by combining first and last name with '.' in between and adding 2024@gmail.com
-email = f"{first_name}.{last_name}{random.randint(100, 5000)}@gmail.com"
 
 # Generates the random password with alphanumeric values
 fake_password = ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
@@ -110,7 +98,7 @@ def move_to_element(driver, actions):
 
 
 # Sign-up for the ESPN website by switching to iframe, passing fake credentials, and switching back to the main window
-def signup(driver):
+def signup(driver,email,first,last):
     wait = WebDriverWait(driver, 10)
     open_side_menu(driver)
     try:
@@ -121,7 +109,8 @@ def signup(driver):
     wait.until(EC.visibility_of_element_located((By.ID, email_input))).send_keys(
         email + Keys.TAB + Keys.ENTER)
     (wait.until(EC.visibility_of_element_located((By.ID, first_name_input))).
-     send_keys(first_name + Keys.TAB + last_name, Keys.TAB + fake_password))
+     send_keys(first + Keys.TAB + last, Keys.TAB + fake_password))
+
     time.sleep(1)
     driver.find_element(By.ID, submit_button).click()
     time.sleep(2)
@@ -158,7 +147,7 @@ def favorite_team(driver):
 
 
 # Sign-in to existing account
-def log_in(driver):
+def log_in(driver,email):
     wait = WebDriverWait(driver, 10)
     try:
         open_side_menu(driver)
@@ -216,8 +205,7 @@ def delete_profile(driver):
 
 
 # Additional sign-in method to check behavior if the account doesn't exist
-def log_in_no_account(driver):
-    global first_name, last_name, email
+def log_in_no_account(driver, email):
     try:
         wait = WebDriverWait(driver, 10)
         open_side_menu(driver)
@@ -232,8 +220,3 @@ def log_in_no_account(driver):
         return error_msg
     except:
         pass
-    finally:
-        # Resets global variables for the next test
-        first_name = fake.first_name()
-        last_name = fake.last_name()
-        email = f"{first_name}.{last_name}{random.randint(100, 5000)}@gmail.com"

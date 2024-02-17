@@ -27,6 +27,7 @@ To account for that, I implemented secondary Xpaths for some of them. So, the sc
 These are the steps that the script performs.
 
 - navigate to the ESPN website
+- assert that website header/title is correct
 - assert that the ESPN logo is present
 - open the side menu, go to the signup menu, and sign up
 - open the side menu and assert that the welcome message includes the first name with which we just signed up
