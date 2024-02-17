@@ -2,11 +2,11 @@
 
 There are three folders with main.py files in them.
 
-1. ESPN_test_logic => positive_test => main.py is a general script upon which unittest and BrowserStack tests were built. You can ignore that one or run it.
+1. ESPN_test_logic => positive => main.py is a general script upon which unittest and BrowserStack tests were built. You can ignore that one or run it.
 
-2. ESPN_unitTest => positive_test => main.py is a unit test with Chrome, Edge, and Firefox browser tests. Two tests for each
+2. ESPN_unitTest => positive => main.py is a unit test with Chrome, Edge, and Firefox browser tests. Two tests for each
 
-ESPN_BR => Positive_test => main.py is the script for BrowserStack.
+ESPN_BR => Positive => main.py is the script for BrowserStack.
 
 All three scripts get functionalities from the ESPN/tools folder selectors.py and webDrivers.py. Put your BR credentials inside the tools folder.
 
