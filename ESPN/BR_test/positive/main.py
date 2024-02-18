@@ -27,6 +27,14 @@ capabilities = [
         }
     },
     {
+        "browserName": "Safari",
+        'bstack:options': {
+            "os": "OS X",
+            "osVersion": "Ventura",
+            "browserVersion": "16.5"
+        }
+    },
+    {
         "browserName": "Edge",
         'bstack:options': {
             "os": "Windows",
@@ -85,7 +93,7 @@ def run_session(cap):
     except WDE:
         print('The header is incorrect')
 
-    # signup for the ESPN_test_logic - Runs from selectors.py - signup method
+    # signup for the ESPN website - Runs from selectors.py - signup method
     selectors.signup(driver, email, first_name, last_name)
 
     # Check ESPN logo is present - top-left
