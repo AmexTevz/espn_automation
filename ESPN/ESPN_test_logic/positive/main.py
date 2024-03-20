@@ -23,14 +23,14 @@ last_name = fake.last_name()
 # Fake email - a combination of first and last name with random numbers
 email = f"{first_name}.{last_name}{random.randint(100, 5000)}@gmail.com"
 
-# check website title - Runs from selectors.py - assert_element_text method
+# check website title - Runs from script_selectors.py - assert_element_text method
 try:
     selectors.assert_element_text('ESPN - Serving Sports Fans. Anytime. Anywhere.', driver.title)
     print('The header is correct')
 except WDE:
     print('The header is incorrect')
 
-# signup for the ESPN website - Runs from selectors.py - signup method
+# signup for the ESPN website - Runs from script_selectors.py - signup method
 selectors.signup(driver, email, first_name, last_name)
 
 # Check ESPN logo is present - top-left
@@ -54,7 +54,7 @@ except AssertionError:
 except WDE:
     print('The welcome massage not detected')
 
-# Add teams to favorites - Runs from selectors.py favorite_team method
+# Add teams to favorites - Runs from script_selectors.py favorite_team method
 selectors.favorite_team(driver)
 time.sleep(1)
 
@@ -66,7 +66,7 @@ time.sleep(1)
 selectors.log_in(driver, email)
 time.sleep(1)
 
-# Delete the account - Runs from selectors.py - delete_profile method
+# Delete the account - Runs from script_selectors.py - delete_profile method
 selectors.delete_profile(driver)
 time.sleep(1)
 
